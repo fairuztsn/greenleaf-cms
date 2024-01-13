@@ -21,7 +21,6 @@ export default function Login() {
       password: password
     })
 
-    alert(`${email}|${password}`)
     if (error) {
       alert(`Error: ${error.message}`)
     } else {
