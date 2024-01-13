@@ -11,11 +11,9 @@ const override: CSSProperties = {
 function Loading() {
 
   return (
-    <div className="h-screen flex justify-center items-center">
-        <BarLoader
-        color={"#15b24b"}
-      />
-      </div>
+    <BarLoader
+          color={"#15b24b"}
+    />
   )
 }
 
