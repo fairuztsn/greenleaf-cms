@@ -9,8 +9,17 @@ import {
 } from "@nextui-org/react";
 import React from "react";
 import { DarkModeSwitch } from "./darkmodeswitch";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 
 export const UserDropdown = () => {
+  const supabase = createClientComponentClient()
+  const router = useRouter()
+  const handleSignOut = async () => {
+    await supabase.auth.signOut()
+    router.push("/login")
+  }
+
   return (
     <Dropdown>
       <NavbarItem>
@@ -40,7 +49,7 @@ export const UserDropdown = () => {
         <DropdownItem key="system">System</DropdownItem>
         <DropdownItem key="configurations">Configurations</DropdownItem>
         <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-        <DropdownItem key="logout" color="danger" className="text-danger ">
+        <DropdownItem key="logout" color="danger" className="text-danger " onClick={handleSignOut}>
           Log Out
         </DropdownItem>
         <DropdownItem key="switch">

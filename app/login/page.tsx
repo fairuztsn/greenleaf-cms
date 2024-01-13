@@ -25,14 +25,11 @@ export default function Login() {
     if (error) {
       alert(`Error: ${error.message}`)
     } else {
-      alert(`User: ${data}`)
-      router.refresh()
+      setEmail('')
+      setPassword('')
+      router.push("/")
     }
-  }
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut()
-    router.refresh()
+    
   }
 
   const [isVisible, setIsVisible] = React.useState(false);
