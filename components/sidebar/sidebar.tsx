@@ -23,6 +23,14 @@ import { usePathname } from "next/navigation";
 export const SidebarWrapper = () => {
   const pathname = usePathname();
   const { collapsed, setCollapsed } = useSidebarContext();
+  const pathsNotUsingDefaultLayout = ["/login", "/signup", "/signin"]
+
+  if(pathsNotUsingDefaultLayout.includes(pathname)) {
+    return (
+      <div>
+      </div>
+    )
+  }
 
   return (
     <aside className="h-screen z-[202] sticky top-0">

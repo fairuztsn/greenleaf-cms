@@ -7,12 +7,23 @@ import { SearchIcon } from "../icons/searchicon";
 import { BurguerButton } from "./burguer-button";
 import { NotificationsDropdown } from "./notifications-dropdown";
 import { UserDropdown } from "./user-dropdown";
+import { usePathname } from "next/navigation";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const NavbarWrapper = ({ children }: Props) => {
+  const pathname = usePathname()
+  const pathsNotUsingDefaultLayout = ["/login", "/signup", "/signin"]
+  
+  if(pathsNotUsingDefaultLayout.includes(pathname)) {
+    return (
+      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        {children}
+      </div>
+    )
+  }
   return (
     <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
       <Navbar
