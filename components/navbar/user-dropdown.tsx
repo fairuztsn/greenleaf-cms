@@ -7,19 +7,31 @@ import {
   Navbar,
   NavbarItem,
 } from "@nextui-org/react";
-import React from "react";
+import React, { useState } from "react";
 import { DarkModeSwitch } from "./darkmodeswitch";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import Loading from "../loading/loading";
 
 export const UserDropdown = () => {
   const supabase = createClientComponentClient()
   const router = useRouter()
+
+  const [isLoading, setLoading] = useState(false)
+
   const handleSignOut = async () => {
+    setLoading(true)
     await supabase.auth.signOut()
     router.push("/login")
   }
 
+  if(isLoading) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <Loading/>
+      </div>
+    )
+  }
   return (
     <Dropdown>
       <NavbarItem>

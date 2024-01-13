@@ -8,14 +8,19 @@ import { Input } from "@nextui-org/react";
 import { EyeFilledIcon } from '@/components/icons/eye/EyeFilledIcon';
 import { EyeSlashFilledIcon } from '@/components/icons/eye/EyeSlashFilledIcon';
 import { Button } from '@nextui-org/react'
+import Loading from '@/components/loading/loading'
 
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoading, setLoading] = useState(false)
+  const [isVisible, setIsVisible] = React.useState(false);
+
   const router = useRouter()
   const supabase = createClientComponentClient()
 
   const handleSignIn = async () => {
+    setLoading(true)
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password
@@ -31,9 +36,15 @@ export default function Login() {
     
   }
 
-  const [isVisible, setIsVisible] = React.useState(false);
-
   const toggleVisibility = () => setIsVisible(!isVisible);
+
+  if(isLoading) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <Loading/>
+      </div>
+    )
+  }
 
   return (
     <div className="h-screen flex justify-center items-center">
