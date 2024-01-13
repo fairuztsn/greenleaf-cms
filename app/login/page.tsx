@@ -15,23 +15,19 @@ export default function Login() {
   const router = useRouter()
   const supabase = createClientComponentClient()
 
-  const handleSignUp = async () => {
-    await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${location.origin}/auth/callback`,
-      },
-    })
-    router.refresh()
-  }
-
   const handleSignIn = async () => {
-    await supabase.auth.signInWithPassword({
-      email,
-      password,
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password
     })
-    router.refresh()
+
+    alert(`${email}|${password}`)
+    if (error) {
+      alert(`Error: ${error.message}`)
+    } else {
+      alert(`User: ${data}`)
+      router.refresh()
+    }
   }
 
   const handleSignOut = async () => {
@@ -61,7 +57,7 @@ export default function Login() {
       value={password}
     />
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <Button color="primary" className="mb-3" variant="shadow" onClick={handleSignUp}>
+      <Button color="primary" className="mb-3" variant="shadow" onClick={handleSignIn}>
         Log in
       </Button>
     </div>
