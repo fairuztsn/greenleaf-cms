@@ -114,17 +114,17 @@ export const SidebarWrapper = () => {
             </SidebarMenu>
           </div>
           <div className={Sidebar.Footer()}>
-            <Tooltip content={"Settings"} color="primary">
+            <Tooltip content={"Settings"} color="success">
               <div className="max-w-fit">
                 <SettingsIcon />
               </div>
             </Tooltip>
-            <Tooltip content={"Adjustments"} color="primary">
+            <Tooltip content={"Adjustments"} color="success">
               <div className="max-w-fit">
                 <FilterIcon />
               </div>
             </Tooltip>
-            <Tooltip content={"Profile"} color="primary">
+            <Tooltip content={"Profile"} color="success">
               <Avatar
                 src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
                 size="sm"

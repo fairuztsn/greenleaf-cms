@@ -19,8 +19,8 @@ interface Company {
 
 export const CompaniesDropdown = () => {
   const [company, setCompany] = useState<Company>({
-    name: "Acme Co.",
-    location: "Palo Alto, CA",
+    name: "Greenleaf.id",
+    location: "Bandung City, West Java",
     logo: <AcmeIcon />,
   });
   return (
@@ -45,39 +45,39 @@ export const CompaniesDropdown = () => {
       </DropdownTrigger>
       <DropdownMenu
         onAction={(e) => {
-          if (e === "1") {
-            setCompany({
-              name: "Facebook",
-              location: "San Fransico, CA",
-              logo: <AcmeIcon />,
-            });
-          }
-          if (e === "2") {
-            setCompany({
-              name: "Instagram",
-              location: "Austin, Tx",
-              logo: <AcmeLogo />,
-            });
-          }
-          if (e === "3") {
-            setCompany({
-              name: "Twitter",
-              location: "Brooklyn, NY",
-              logo: <AcmeIcon />,
-            });
-          }
-          if (e === "4") {
-            setCompany({
-              name: "Acme Co.",
-              location: "Palo Alto, CA",
-              logo: <AcmeIcon />,
-            });
-          }
+          // if (e === "1") {
+          //   setCompany({
+          //     name: "Facebook",
+          //     location: "San Fransico, CA",
+          //     logo: <AcmeIcon />,
+          //   });
+          // }
+          // if (e === "2") {
+          //   setCompany({
+          //     name: "Instagram",
+          //     location: "Austin, Tx",
+          //     logo: <AcmeLogo />,
+          //   });
+          // }
+          // if (e === "3") {
+          //   setCompany({
+          //     name: "Twitter",
+          //     location: "Brooklyn, NY",
+          //     logo: <AcmeIcon />,
+          //   });
+          // }
+          // if (e === "4") {
+          //   setCompany({
+          //     name: "Acme Co.",
+          //     location: "Palo Alto, CA",
+          //     logo: <AcmeIcon />,
+          //   });
+          // }
         }}
         aria-label="Avatar Actions"
       >
         <DropdownSection title="Companies">
-          <DropdownItem
+          {/* <DropdownItem
             key="1"
             startContent={<AcmeIcon />}
             description="San Fransico, CA"
@@ -87,8 +87,8 @@ export const CompaniesDropdown = () => {
             }}
           >
             Facebook
-          </DropdownItem>
-          <DropdownItem
+          </DropdownItem> */}
+          {/* <DropdownItem
             key="2"
             startContent={<AcmeLogo />}
             description="Austin, Tx"
@@ -98,8 +98,8 @@ export const CompaniesDropdown = () => {
             }}
           >
             Instagram
-          </DropdownItem>
-          <DropdownItem
+          </DropdownItem> */}
+          {/* <DropdownItem
             key="3"
             startContent={<AcmeIcon />}
             description="Brooklyn, NY"
@@ -109,17 +109,17 @@ export const CompaniesDropdown = () => {
             }}
           >
             Twitter
-          </DropdownItem>
+          </DropdownItem> */}
           <DropdownItem
             key="4"
             startContent={<AcmeIcon />}
-            description="Palo Alto, CA"
+            description={company.location}
             classNames={{
               base: "py-4",
               title: "text-base font-semibold",
             }}
           >
-            Acme Co.
+            {company.name}
           </DropdownItem>
         </DropdownSection>
       </DropdownMenu>
