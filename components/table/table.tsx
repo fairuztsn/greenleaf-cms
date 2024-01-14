@@ -30,6 +30,11 @@ export const TableWrapper = ({ context }: { context: "users" | "menu" | "feature
 
         setData(result.data);
         setColumns(result.columns);
+
+        setColumns(prevColumns => {
+          return [...prevColumns, { name: 'actions', uid: 'actions' }]
+        });
+        
         setLoading(false); // Set loading to false once data is fetched
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -48,7 +53,7 @@ export const TableWrapper = ({ context }: { context: "users" | "menu" | "feature
     return <p>No data available.</p>;
   }
 
-    return (
+  return (
     <div className=" w-full flex flex-col gap-4">
       <Table aria-label="Example table with custom cells">
         <TableHeader columns={columns}>
@@ -75,6 +80,6 @@ export const TableWrapper = ({ context }: { context: "users" | "menu" | "feature
         </TableBody>
       </Table>
     </div>
-  );
+  )
   
 };
