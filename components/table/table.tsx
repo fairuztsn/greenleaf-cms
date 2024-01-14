@@ -19,7 +19,7 @@ type Column = {
 }
 
 export const TableWrapper = ({ context }: { context: "users" | "menu" | "features" }) => {
-  const [data, setData] = useState<User[]>([]);
+  const [data, setData] = useState<any[]>([]);
   const [columns, setColumns] = useState<Column[]>([]);
   const [loading, setLoading] = useState(true);
 
