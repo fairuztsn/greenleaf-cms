@@ -4,12 +4,14 @@ import { DeleteIcon } from "../icons/table/delete-icon";
 import { EditIcon } from "../icons/table/edit-icon";
 import { EyeIcon } from "../icons/table/eye-icon";
 import { User as SupabaseUser } from "@supabase/supabase-js";
+import { supabase } from "@/utils/supabase";
 
 interface Props {
   user: SupabaseUser;
   columnKey: string | React.Key;
 }
 
+// TODO: Make not only for users
 export const RenderCell = ({ user, columnKey }: Props) => {
   // @ts-ignore
   const cellValue = user[columnKey];
@@ -52,6 +54,7 @@ export const RenderCell = ({ user, columnKey }: Props) => {
       );
 
     case "actions":
+
       return (
         <div className="flex items-center gap-4 ">
           <div>
@@ -72,12 +75,29 @@ export const RenderCell = ({ user, columnKey }: Props) => {
             <Tooltip
               content="Delete user"
               color="danger"
-              onClick={() => console.log("Delete user", user.id)}
             >
-              <button>
+              <button onClick={async () => {
+                alert("Performing")
+                try {
+                  const { error } = await supabase
+                    .from('ad_profile_data')
+                    .delete()
+                    .eq('id', user.id);
+
+                  if (error) {
+                    alert("Something went wrong");
+                    alert(error.message);
+                  }else {
+                    window.location.reload()
+                  }
+                } catch (error) {
+                  console.error("An unexpected error occurred:", error);
+                }
+              }}>
                 <DeleteIcon size={20} fill="#FF0080" />
               </button>
             </Tooltip>
+
           </div>
         </div>
       );

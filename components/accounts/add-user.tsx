@@ -31,7 +31,7 @@ export const AddUser = () => {
     { name: "home_province", type: "text" },
     { name: "photo_profile", type: "text" },
     // { name: "status", type: "text" },
-    { name: "creator", type: "text" },
+    // { name: "creator", type: "text" },
     // { name: "updater", type: "text" },
     { name: "role_id", type: "number" },
     { name: "privilege_id", type: "text" },
@@ -68,11 +68,11 @@ export const AddUser = () => {
     setIsLoading(true)
 
     let updatedValues = {...data, 
-      updater: currentUser.email, 
+      creator: currentUser.email, 
       created_at: new Date().toISOString(), 
       status: false
     }
-    
+
     setData(updatedValues)
     
     const { error } = await supabase.from('ad_profile_data').insert(data)
@@ -81,9 +81,11 @@ export const AddUser = () => {
       console.error(error)
       alert("Something went wrong")
       alert(error.message)
+
+      setIsLoading(false)
+    }else{
+      window.location.reload()
     }
-    
-    setIsLoading(false)
   }
   
   if(isLoading) {
