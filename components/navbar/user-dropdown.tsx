@@ -1,5 +1,6 @@
 import {
   Avatar,
+  AvatarIcon,
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -50,7 +51,12 @@ export const UserDropdown = () => {
             as="button"
             color="secondary"
             size="md"
-            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+            icon={<AvatarIcon />}
+            classNames={{
+            base: "bg-[#15b24b]",
+            icon: "text-black/80",
+          }}
+            isBordered
           />
         </DropdownTrigger>
       </NavbarItem>

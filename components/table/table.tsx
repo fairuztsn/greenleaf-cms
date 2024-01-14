@@ -7,12 +7,48 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
-import React from "react";
-import { columns, users } from "./data";
+import React, { useEffect, useState } from "react";
+import { fetchDataFromSupabase } from "./data";
 import { RenderCell } from "./render-cell";
+import { supabase } from "@/utils/supabase";
+import Loading from "../loading/loading";
 
-export const TableWrapper = () => {
-  return (
+type Column = {
+  name: string
+  uid: string
+}
+
+export const TableWrapper = ({ context }: { context: "users" | "menu" | "features" }) => {
+  const [data, setData] = useState<User[]>([]);
+  const [columns, setColumns] = useState<Column[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await fetchDataFromSupabase(context);
+
+        setData(result.data);
+        setColumns(result.columns);
+        setLoading(false); // Set loading to false once data is fetched
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false); // Set loading to false in case of an error
+      }
+    };
+
+    fetchData();
+  }, [context]);
+
+  if (loading) {
+    return <Loading/>;
+  }
+
+  if (data.length === 0) {
+    return <p>No data available.</p>;
+  }
+
+    return (
     <div className=" w-full flex flex-col gap-4">
       <Table aria-label="Example table with custom cells">
         <TableHeader columns={columns}>
@@ -26,7 +62,7 @@ export const TableWrapper = () => {
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody items={users}>
+        <TableBody items={data}>
           {(item) => (
             <TableRow>
               {(columnKey) => (
@@ -40,4 +76,5 @@ export const TableWrapper = () => {
       </Table>
     </div>
   );
+  
 };

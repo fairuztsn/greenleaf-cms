@@ -63,7 +63,7 @@ export const Content = () => (
           View All
         </Link>
       </div>
-      <TableWrapper />
+      {/* <TableWrapper/> */}
     </div>
   </div>
 );

@@ -11,6 +11,7 @@ import { UsersIcon } from "@/components/icons/breadcrumb/users-icon";
 import { SettingsIcon } from "@/components/icons/sidebar/settings-icon";
 import { TableWrapper } from "@/components/table/table";
 import { AddUser } from "./add-user";
+import { User } from "@supabase/supabase-js";
 
 export const Accounts = () => {
   return (
@@ -57,7 +58,7 @@ export const Accounts = () => {
         </div>
       </div>
       <div className="max-w-[95rem] mx-auto w-full">
-        <TableWrapper />
+        <TableWrapper context="users"/>
       </div>
     </div>
   );

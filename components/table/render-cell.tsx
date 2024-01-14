@@ -3,10 +3,10 @@ import React from "react";
 import { DeleteIcon } from "../icons/table/delete-icon";
 import { EditIcon } from "../icons/table/edit-icon";
 import { EyeIcon } from "../icons/table/eye-icon";
-import { users } from "./data";
+import { User as SupabaseUser } from "@supabase/supabase-js";
 
 interface Props {
-  user: (typeof users)[number];
+  user: SupabaseUser;
   columnKey: string | React.Key;
 }
 
@@ -32,7 +32,7 @@ export const RenderCell = ({ user, columnKey }: Props) => {
             <span>{cellValue}</span>
           </div>
           <div>
-            <span>{user.team}</span>
+            <span>{user.email}</span>
           </div>
         </div>
       );
@@ -42,11 +42,9 @@ export const RenderCell = ({ user, columnKey }: Props) => {
           size="sm"
           variant="flat"
           color={
-            cellValue === "active"
+            cellValue
               ? "success"
-              : cellValue === "paused"
-              ? "danger"
-              : "warning"
+              : "danger"
           }
         >
           <span className="capitalize text-xs">{cellValue}</span>
