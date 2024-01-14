@@ -11,7 +11,7 @@ const tableMap: Record<TableContext, string> = {
 
 const columnMap: Record<ColumnContext, string[]> = {
   "users": [
-    "id", "created_at", "user_id","first_name","last_name","email","phone_number","home_street","home_city","home_province","photo_profile","status","creator","updated_at","created_at","updater","role_id","privilege_id"
+    "id", "created_at", "user_id","first_name","last_name","email","phone_number","home_street","home_city","home_province","photo_profile","status","creator","updated_at","updater","role_id","privilege_id"
   ],
   "menu": [
     "id", "created_at","menu_name","group_menu","status","creator","updated_at","updater"
