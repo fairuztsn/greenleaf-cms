@@ -21,6 +21,8 @@ export default function Login() {
 
   const handleSignIn = async () => {
     setLoading(true)
+    // TODO: Add logic if admin
+    // TODO: Insert to ad_login_attempts
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password
@@ -64,7 +66,7 @@ export default function Login() {
       value={password}
     />
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <Button color="primary" className="mb-3" variant="shadow" onClick={handleSignIn}>
+      <Button color="success" className="mb-3" variant="shadow" onClick={handleSignIn}>
         Log in
       </Button>
     </div>

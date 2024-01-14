@@ -51,7 +51,7 @@ export const Accounts = () => {
         </div>
         <div className="flex flex-row gap-3.5 flex-wrap">
           <AddUser />
-          <Button color="primary" startContent={<ExportIcon />}>
+          <Button color="success" startContent={<ExportIcon />}>
             Export to CSV
           </Button>
         </div>

@@ -7,23 +7,33 @@ import {
   Navbar,
   NavbarItem,
 } from "@nextui-org/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DarkModeSwitch } from "./darkmodeswitch";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { User, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import Loading from "../loading/loading";
+import { getSupabaseSession } from "@/utils/session";
 
 export const UserDropdown = () => {
   const supabase = createClientComponentClient()
   const router = useRouter()
 
   const [isLoading, setLoading] = useState(false)
+  const [user, setUser] = useState<User | null>(null)
 
   const handleSignOut = async () => {
     setLoading(true)
     await supabase.auth.signOut()
     router.push("/login")
   }
+
+  useEffect(() => {
+    async function getUser() {
+      const user = (await supabase.auth.getUser()).data.user
+      setUser(user)
+    }
+    getUser();
+  }, []);
 
   if(isLoading) {
     return (
@@ -53,7 +63,7 @@ export const UserDropdown = () => {
           className="flex flex-col justify-start w-full items-start"
         >
           <p>Signed in as</p>
-          <p>zoey@example.com</p>
+          <p>{user?.email}</p>
         </DropdownItem>
         <DropdownItem key="settings">My Settings</DropdownItem>
         <DropdownItem key="team_settings">Team Settings</DropdownItem>

@@ -10,4 +10,6 @@ export const getSupabaseSession = async () => {
   if (!session) {
     redirect("/login")
   }
+
+  return session
 }

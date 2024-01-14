@@ -57,7 +57,7 @@ export const Content = () => (
         <Link
           href="/accounts"
           as={NextLink}
-          color="primary"
+          color="success"
           className="cursor-pointer"
         >
           View All
