@@ -103,6 +103,7 @@ export const AddUser = () => {
           })
           .eq('id', userData.id);
 
+        //TODO: Set status to true after verified
         if (updateProfileDataError) {
           throw new Error(updateProfileDataError.message);
         }

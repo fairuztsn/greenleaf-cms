@@ -20,23 +20,68 @@ export default function Login() {
   const supabase = createClientComponentClient()
 
   const handleSignIn = async () => {
-    setLoading(true)
-    // TODO: Add logic if admin
-    // TODO: Insert to ad_login_attempts
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password
-    })
+    setLoading(true);
 
-    if (error) {
-      alert(`Error: ${error.message}`)
-    } else {
-      setEmail('')
-      setPassword('')
-      router.push("/")
+    try {
+      const { data: userData, error: userDataFetchingError } = await supabase
+        .from('ad_profile_data')
+        .select("*")
+        .eq('email', email)
+        .single();
+
+      if (userDataFetchingError) {
+        throw new Error(userDataFetchingError.message);
+      }
+
+      const { error: userAttemptError } = await supabase
+        .from('ad_user_attempt')
+        .insert({
+          user_id: userData.user_id,
+          created_at: new Date().toISOString(),
+          attempts: 1,
+          info: "Attempting login in cms"
+        });
+
+      if (userAttemptError) {
+        throw new Error(userAttemptError.message);
+      }
+
+      if (userData && (userData.privilege_id === "Admin" || userData.privilege_id === "Super Admin")) {
+        const { data, error: signInError } = await supabase.auth.signInWithPassword({
+          email: email,
+          password: password
+        });
+
+        if (signInError) {
+          throw new Error(signInError.message);
+        }
+
+        const currentTimeStamp = new Date().toISOString();
+        const { error: addUserLoginHistoryError } = await supabase
+          .from('ad_login_history')
+          .insert({
+            user_id: userData.user_id,
+            created_at: currentTimeStamp,
+            last_logged_in: currentTimeStamp,
+            ip: "0.0.0.0", // TODO: Add ip
+            host_name: navigator.userAgent
+          });
+
+        if (addUserLoginHistoryError) {
+          throw new Error(addUserLoginHistoryError.message);
+        }
+      }else {
+        throw new Error("User not found")
+      }
+
+      setEmail('');
+      setPassword('');
+      router.push("/");
+    } catch (error) {
+      alert(`An error occurred: ${error}`);
     }
-    
-  }
+}
+
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
