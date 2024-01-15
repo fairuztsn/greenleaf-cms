@@ -9,7 +9,7 @@ const tableMap = (context: string): string | undefined => {
     return {
         "users": "ad_profile_data",
         "menu": "ad_menu",
-        "feature": "ad_feature"
+        "features": "ad_feature"
     }[context];
 }
 

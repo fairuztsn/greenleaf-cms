@@ -19,12 +19,15 @@ type Column = {
   type: string; // You might want to use a more specific type based on your actual data types
 };
 
-export const AddMenu = () => {
+export const AddFeature = () => {
   const columns: Column[] = [
-    {name: "menu_name", type: "text"},
-    {name: "group_menu", type: "text"},
+    {name: "name", type: "text"},
+    {name: "group_feature", type: "text"},
+    {name: "icon_feature", type: "text"},
     {name: "status", type: "number"},
-    {name: "user_privilege", type: "text"}
+    {name: "creator", type: "text"},
+    {name: "updater", type: "text"},
+    {name: "role_id", type: "number"}
   ]
 
   const columnNames = columns.map(cols => cols.name)
@@ -55,11 +58,12 @@ export const AddMenu = () => {
     setData(updatedValues)
   }
 
-  const handleAddMenu = async () => {
+  const handleAddFeature = async () => {
     setIsLoading(true);
     try {
       setData({...data, creator: currentUser.email})
-      const { error: insertError } = await supabase.from('ad_menu').insert(data);
+      console.log(Object.keys(data))
+      const { error: insertError } = await supabase.from('ad_feature').insert(data);
 
       if (insertError) {
         throw new Error(insertError.message)
@@ -79,7 +83,7 @@ export const AddMenu = () => {
   return (
     <div>
       <Button onPress={onOpen} color="success">
-        Add Menu
+        Add Feature
       </Button>
       <Modal
         isOpen={isOpen}
@@ -90,7 +94,7 @@ export const AddMenu = () => {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Add Menu
+                Add Feature
               </ModalHeader>
               <ModalBody>
                 {columnNames.map((columnName, index) => (
@@ -108,8 +112,8 @@ export const AddMenu = () => {
                 <Button color="danger" variant="flat" onClick={onClose}>
                   Close
                 </Button>
-                <Button color="success" onPress={handleAddMenu}>
-                  Add Menu
+                <Button color="success" onPress={handleAddFeature}>
+                  Add Feature
                 </Button>
               </ModalFooter>
             </>

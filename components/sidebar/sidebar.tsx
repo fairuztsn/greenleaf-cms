@@ -19,6 +19,7 @@ import { useSidebarContext } from "../layout/layout-context";
 import { ChangeLogIcon } from "../icons/sidebar/changelog-icon";
 import { usePathname } from "next/navigation";
 import MenuIcon from '@mui/icons-material/Menu';
+import { PeopleAlt, SettingsSuggest } from "@mui/icons-material";
 export const SidebarWrapper = () => {
   const pathname = usePathname();
   const { collapsed, setCollapsed } = useSidebarContext();
@@ -56,7 +57,7 @@ export const SidebarWrapper = () => {
               <SidebarItem
                 isActive={pathname === "/users"}
                 title="Users"
-                icon={<AccountsIcon />}
+                icon={<PeopleAlt />}
                 href="users"
               />
               <SidebarItem
@@ -65,15 +66,16 @@ export const SidebarWrapper = () => {
                 href="menu"
                 icon={<MenuIcon />}
               />
-              <CollapseItems
+              {/* <CollapseItems
                 icon={<BalanceIcon />}
                 items={["Banks Accounts", "Credit Cards", "Loans"]}
                 title="Balances"
-              />
+              /> */}
               <SidebarItem
-                isActive={pathname === "/customers"}
-                title="Customers"
-                icon={<CustomersIcon />}
+                isActive={pathname === "/features"}
+                title="Features"
+                icon={<SettingsSuggest />}
+                href="features"
               />
               <SidebarItem
                 isActive={pathname === "/products"}

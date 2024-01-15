@@ -13,23 +13,22 @@ interface Props {
   columnKey: string | React.Key;
 }
 
-// TODO: Make not only for users
 export const RenderCell = ({ data, columnKey }: Props) => {
   const pathname = usePathname().substring(1)
   // @ts-ignore
   const cellValue = data[columnKey];
   switch (columnKey) {
-    case "name":
-      return (
-        <User
-          avatarProps={{
-            src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-          }}
-          name={cellValue}
-        >
-          {data.email}
-        </User>
-      );
+    // case "name":
+    //   return (
+    //     <User
+    //       avatarProps={{
+    //         src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+    //       }}
+    //       name={cellValue}
+    //     >
+    //       {data.email}
+    //     </User>
+    //   );
     case "role":
       return (
         <div>
@@ -81,7 +80,6 @@ export const RenderCell = ({ data, columnKey }: Props) => {
             >
               <button onClick={async () => {
                 const confirmed = window.confirm("Are you sure you want to delete this "+pathname+"?")
-
                 if(confirmed) {
                   try {
                     await destroy(pathname, {key: "id", val: data.id})
