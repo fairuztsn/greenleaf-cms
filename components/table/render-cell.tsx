@@ -49,7 +49,7 @@ export const RenderCell = ({ user, columnKey }: Props) => {
               : "danger"
           }
         >
-          <span className="capitalize text-xs">{cellValue}</span>
+          <span className="capitalize text-xs">{cellValue === true ? "true": "false"}</span>
         </Chip>
       );
 
@@ -77,8 +77,10 @@ export const RenderCell = ({ user, columnKey }: Props) => {
               color="danger"
             >
               <button onClick={async () => {
-                alert("Performing")
-                try {
+                const confirmed = window.confirm("Are you sure you want to delete this user?")
+
+                if(confirmed) {
+                  try {
                   const { error } = await supabase
                     .from('ad_profile_data')
                     .delete()
@@ -92,6 +94,7 @@ export const RenderCell = ({ user, columnKey }: Props) => {
                   }
                 } catch (error) {
                   console.error("An unexpected error occurred:", error);
+                }
                 }
               }}>
                 <DeleteIcon size={20} fill="#FF0080" />
