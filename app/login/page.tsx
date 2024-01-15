@@ -42,10 +42,6 @@ export default function Login() {
           info: "Attempting login in cms"
         });
 
-      if (userAttemptError) {
-        throw new Error(userAttemptError.message);
-      }
-
       if (userData && (userData.privilege_id === "Admin" || userData.privilege_id === "Super Admin")) {
         const { data, error: signInError } = await supabase.auth.signInWithPassword({
           email: email,
@@ -78,11 +74,10 @@ export default function Login() {
       setPassword('');
       router.push("/");
     } catch (error) {
-      alert(`An error occurred: ${error}`);
+      alert(`An error occurred.`);
+      setLoading(false)
     }
 }
-
-
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   if(isLoading) {

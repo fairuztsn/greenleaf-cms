@@ -12,30 +12,31 @@ import { SettingsIcon } from "@/components/icons/sidebar/settings-icon";
 import { TableWrapper } from "@/components/table/table";
 import { AddUser } from "./add-user";
 import { User } from "@supabase/supabase-js";
+import { usePathname } from "next/navigation";
 
-export const Accounts = () => {
+export const Users = () => {
+  const pathname = usePathname()
+  const pathnameWithoutSlash = pathname.substring(1)
+
   return (
     <div className="my-14 lg:px-6 max-w-[95rem] mx-auto w-full flex flex-col gap-4">
       <ul className="flex">
         <li className="flex gap-2">
           <HouseIcon />
           <Link href={"/"}>
-            <span>Home</span>
+            <span>home</span>
           </Link>
           <span> / </span>{" "}
         </li>
 
         <li className="flex gap-2">
           <UsersIcon />
-          <span>Users</span>
+          <span>{pathnameWithoutSlash}</span>
           <span> / </span>{" "}
-        </li>
-        <li className="flex gap-2">
-          <span>List</span>
         </li>
       </ul>
 
-      <h3 className="text-xl font-semibold">All Accounts</h3>
+      <h3 className="text-xl font-semibold">All {pathnameWithoutSlash}</h3>
       <div className="flex justify-between flex-wrap gap-4 items-center">
         <div className="flex items-center gap-3 flex-wrap md:flex-nowrap">
           {/* <Input

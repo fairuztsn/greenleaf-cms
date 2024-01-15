@@ -1,5 +1,5 @@
 import React from 'react';
-import {Accounts} from '@/components/accounts';
+import { Users } from '@/components/users';
 import { getSupabaseSession } from '@/utils/session';
 import Link from 'next/link';
 import { supabase } from '@/utils/supabase';
@@ -14,7 +14,7 @@ const accounts = async () => {
          <Error/>
       )
    }
-   return <Accounts/>;
+   return <Users/>;
 };
 
 export default accounts;
