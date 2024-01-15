@@ -35,13 +35,14 @@ export const AddUser = () => {
     // { name: "updater", type: "text" },
     { name: "role_id", type: "number" },
     { name: "privilege_id", type: "text" },
+    { name: "password", type: "password"}
   ]
 
   const columnNames = columns.map(cols => cols.name)
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
-  const [currentUser, setCurrentUser] = useState<any>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [ currentUser, setCurrentUser ] = useState<any>(null)
+  const [ isLoading, setIsLoading ] = useState(true)
 
   const [data, setData] = useState<Object>(
     Object.fromEntries(columnNames.map((col: string) => [col, null]))
@@ -65,29 +66,55 @@ export const AddUser = () => {
   }
 
   const handleAddUser = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
 
-    let updatedValues = {...data, 
-      creator: currentUser.email, 
-      created_at: new Date().toISOString(), 
-      status: false
-    }
+    const userData = {
+      ...data,
+      creator: currentUser.email,
+      created_at: new Date().toISOString(),
+      status: false,
+    };
 
-    setData(updatedValues)
     
-    const { error } = await supabase.from('ad_profile_data').insert(data)
-    
-    if(error) {
-      console.error(error)
-      alert("Something went wrong")
-      alert(error.message)
+    try {
+      const { password, ...userDataWithoutPassword } = userData;
+      const { error: insertError } = await supabase.from('ad_profile_data').insert(userDataWithoutPassword);
 
-      setIsLoading(false)
-    }else{
-      window.location.reload()
+      if (insertError) {
+        console.error(insertError);
+        alert("Something went wrong");
+        alert(insertError.message);
+      } else {
+        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+          email: userData.email,
+          password: userData.password,
+        });
+
+        if (signUpError) {
+          throw new Error(signUpError.message);
+        }
+
+        console.log((await supabase.auth.getUser()).data.user?.email)
+        const { error: updateProfileDataError } = await supabase
+          .from('ad_profile_data')
+          .update({
+            user_id: signUpData?.user?.aud,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', userData.id);
+
+        if (updateProfileDataError) {
+          throw new Error(updateProfileDataError.message);
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred: " + error);
+    } finally {
+      setIsLoading(false);
     }
-  }
-  
+}
+
   if(isLoading) {
     return <Loading/>
   }
@@ -135,5 +162,4 @@ export const AddUser = () => {
         </ModalContent>
       </Modal>
     </div>
-  )
-};
+  )}
