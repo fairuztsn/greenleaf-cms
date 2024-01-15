@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { supabase } from '@/utils/supabase';
 import Error from '@/components/error';
 
-const accounts = async () => {
+const users = async () => {
    const session = await getSupabaseSession()
    const { data, error } = await supabase.from('ad_profile_data').select("*")
 
@@ -17,4 +17,4 @@ const accounts = async () => {
    return <Users/>;
 };
 
-export default accounts;
+export default users;
