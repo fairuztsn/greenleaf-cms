@@ -7,10 +7,10 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
+
 import React, { useEffect, useState } from "react";
-import { fetchDataFromSupabase } from "./data";
-import { RenderCell } from "./render-cell";
-import { supabase } from "@/utils/supabase";
+import { fetchDataFromSupabase } from "../data";
+import { RenderCell } from "../render-cell";
 import Loading from "../loading/loading";
 
 type Column = {
@@ -72,7 +72,7 @@ export const TableWrapper = ({ context }: { context: "users" | "menu" | "feature
             <TableRow>
               {(columnKey) => (
                 <TableCell>
-                  {RenderCell({ user: item, columnKey: columnKey })}
+                  {RenderCell({ data: item, columnKey: columnKey })}
                 </TableCell>
               )}
             </TableRow>

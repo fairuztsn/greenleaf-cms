@@ -10,10 +10,10 @@ import { HouseIcon } from "@/components/icons/breadcrumb/house-icon";
 import { UsersIcon } from "@/components/icons/breadcrumb/users-icon";
 import { SettingsIcon } from "@/components/icons/sidebar/settings-icon";
 import { TableWrapper } from "@/components/table/table";
-import { AddUser } from "./add-user";
+import { AddMenu } from "./add-menu";
 import { usePathname } from "next/navigation";
 
-export const Users = () => {
+export const Menus = () => {
   const pathname = usePathname()
   const pathnameWithoutSlash = pathname.substring(1)
 
@@ -51,14 +51,14 @@ export const Users = () => {
           <DotsIcon />
         </div>
         <div className="flex flex-row gap-3.5 flex-wrap">
-          <AddUser />
+          <AddMenu />
           <Button color="success" startContent={<ExportIcon />}>
             Export to CSV
           </Button>
         </div>
       </div>
       <div className="max-w-[95rem] mx-auto w-full">
-        <TableWrapper context="users"/>
+        <TableWrapper context="menu"/>
       </div>
     </div>
   );

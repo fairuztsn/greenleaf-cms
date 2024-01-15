@@ -19,23 +19,12 @@ type Column = {
   type: string; // You might want to use a more specific type based on your actual data types
 };
 
-export const AddUser = () => {
+export const AddMenu = () => {
   const columns: Column[] = [
-    // { name: "user_id", type: "text" },
-    { name: "first_name", type: "text" },
-    { name: "last_name", type: "text" },
-    { name: "email", type: "email" },
-    // { name: "phone_number", type: "text" },
-    { name: "home_street", type: "text" },
-    { name: "home_city", type: "text" },
-    { name: "home_province", type: "text" },
-    { name: "photo_profile", type: "text" },
-    // { name: "status", type: "text" },
-    // { name: "creator", type: "text" },
-    // { name: "updater", type: "text" },
-    { name: "role_id", type: "number" },
-    { name: "privilege_id", type: "text" },
-    { name: "password", type: "password"}
+    {name: "menu_name", type: "text"},
+    {name: "group_menu", type: "text"},
+    {name: "status", type: "number"},
+    {name: "user_privilege", type: "text"}
   ]
 
   const columnNames = columns.map(cols => cols.name)
@@ -61,57 +50,22 @@ export const AddUser = () => {
   }, [])
 
   const handleInputChange = (index: string, value: any) => {
+    value = index === "status" && value > 0 ? 1 : value
     let updatedValues = { ...data, [index]: value };
     setData(updatedValues)
   }
 
-  const handleAddUser = async () => {
+  const handleAddMenu = async () => {
     setIsLoading(true);
-
-    const userData = {
-      ...data,
-      creator: currentUser.email,
-      created_at: new Date().toISOString(),
-      status: false,
-    };
-
-    
+    console.log(data)
     try {
-      const { password, ...userDataWithoutPassword } = userData;
-      const { error: insertError } = await supabase.from('ad_profile_data').insert(userDataWithoutPassword);
+      const { error: insertError } = await supabase.from('ad_menu').insert(data);
 
       if (insertError) {
-        console.error(insertError);
-        alert("Something went wrong");
-        alert(insertError.message);
-      } else {
-        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-          email: userData.email,
-          password: userData.password,
-        });
-
-        if (signUpError) {
-          throw new Error(signUpError.message);
-        }
-
-        console.log((await supabase.auth.getUser()).data.user?.email)
-        const { error: updateProfileDataError } = await supabase
-          .from('ad_profile_data')
-          .update({
-            user_id: signUpData?.user?.aud,
-            updated_at: new Date().toISOString(),
-          })
-          .eq('id', userData.id);
-
-        //TODO: Set status to true after verified
-        if (updateProfileDataError) {
-          throw new Error(updateProfileDataError.message);
-        }
+        throw new Error(insertError.message)
       }
-
       window.location.reload()
     } catch (error) {
-      console.error(error);
       alert("An error occurred: " + error);
     } finally {
       setIsLoading(false);
@@ -125,7 +79,7 @@ export const AddUser = () => {
   return (
     <div>
       <Button onPress={onOpen} color="success">
-        Add User
+        Add Menu
       </Button>
       <Modal
         isOpen={isOpen}
@@ -136,7 +90,7 @@ export const AddUser = () => {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Add User
+                Add Menu
               </ModalHeader>
               <ModalBody>
                 {columnNames.map((columnName, index) => (
@@ -145,19 +99,17 @@ export const AddUser = () => {
                     label={snakeToSentence(columnName)}
                     variant="bordered"
                     type={columns.find(column => column.name === columnName)?.type || "text"}
+                    max={1} min={0} 
                     onChange={(e) => handleInputChange(columnName, e.target.value)}
                   />
                 ))}
-
-                {/* <Input label="Password" type="password" variant="bordered" />
-                <Input label="Confirm Password" type="password" variant="bordered" /> */}
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="flat" onClick={onClose}>
                   Close
                 </Button>
-                <Button color="success" onPress={handleAddUser}>
-                  Add User
+                <Button color="success" onPress={handleAddMenu}>
+                  Add Menu
                 </Button>
               </ModalFooter>
             </>

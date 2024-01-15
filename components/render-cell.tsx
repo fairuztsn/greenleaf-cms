@@ -1,20 +1,23 @@
 import { User, Tooltip, Chip } from "@nextui-org/react";
 import React from "react";
-import { DeleteIcon } from "../icons/table/delete-icon";
-import { EditIcon } from "../icons/table/edit-icon";
-import { EyeIcon } from "../icons/table/eye-icon";
+import { DeleteIcon } from "./icons/table/delete-icon";
+import { EditIcon } from "./icons/table/edit-icon";
+import { EyeIcon } from "./icons/table/eye-icon";
 import { User as SupabaseUser } from "@supabase/supabase-js";
 import { supabase } from "@/utils/supabase";
+import { usePathname } from "next/navigation";
+import { destroy } from "./handler";
 
 interface Props {
-  user: SupabaseUser;
+  data: any;
   columnKey: string | React.Key;
 }
 
 // TODO: Make not only for users
-export const RenderCell = ({ user, columnKey }: Props) => {
+export const RenderCell = ({ data, columnKey }: Props) => {
+  const pathname = usePathname().substring(1)
   // @ts-ignore
-  const cellValue = user[columnKey];
+  const cellValue = data[columnKey];
   switch (columnKey) {
     case "name":
       return (
@@ -24,7 +27,7 @@ export const RenderCell = ({ user, columnKey }: Props) => {
           }}
           name={cellValue}
         >
-          {user.email}
+          {data.email}
         </User>
       );
     case "role":
@@ -34,7 +37,7 @@ export const RenderCell = ({ user, columnKey }: Props) => {
             <span>{cellValue}</span>
           </div>
           <div>
-            <span>{user.email}</span>
+            <span>{data.email}</span>
           </div>
         </div>
       );
@@ -59,43 +62,35 @@ export const RenderCell = ({ user, columnKey }: Props) => {
         <div className="flex items-center gap-4 ">
           <div>
             <Tooltip content="Details">
-              <button onClick={() => console.log("View user", user.id)}>
+              <button onClick={() => console.log("View ", data.id)}>
                 <EyeIcon size={20} fill="#979797" />
               </button>
             </Tooltip>
           </div>
           <div>
-            <Tooltip content="Edit user" color="secondary">
-              <button onClick={() => console.log("Edit user", user.id)}>
+            <Tooltip content="Edit" color="secondary">
+              <button onClick={() => console.log("Edit ", data.id)}>
                 <EditIcon size={20} fill="#979797" />
               </button>
             </Tooltip>
           </div>
           <div>
             <Tooltip
-              content="Delete user"
+              content="Delete"
               color="danger"
             >
               <button onClick={async () => {
-                const confirmed = window.confirm("Are you sure you want to delete this user?")
+                const confirmed = window.confirm("Are you sure you want to delete this "+pathname+"?")
 
                 if(confirmed) {
                   try {
-                  const { error } = await supabase
-                    .from('ad_profile_data')
-                    .delete()
-                    .eq('id', user.id);
-
-                  if (error) {
-                    alert("Something went wrong");
-                    alert(error.message);
-                  }else {
+                    await destroy(pathname, {key: "id", val: data.id})
                     window.location.reload()
+                  }catch(err) {
+                    alert(err)
                   }
-                } catch (error) {
-                  console.error("An unexpected error occurred:", error);
                 }
-                }
+
               }}>
                 <DeleteIcon size={20} fill="#FF0080" />
               </button>
