@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { supabase } from '@/utils/supabase';
 import Error from '@/components/error';
 
+//TODO: ADd edit and create status on user
 const users = async () => {
    const session = await getSupabaseSession()
    const { data, error } = await supabase.from('ad_profile_data').select("*")

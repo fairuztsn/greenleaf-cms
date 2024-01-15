@@ -3,7 +3,6 @@ import { Sidebar } from "./sidebar.styles";
 import { Avatar, Tooltip } from "@nextui-org/react";
 import { CompaniesDropdown } from "./companies-dropdown";
 import { HomeIcon } from "../icons/sidebar/home-icon";
-import { PaymentsIcon } from "../icons/sidebar/payments-icon";
 import { BalanceIcon } from "../icons/sidebar/balance-icon";
 import { AccountsIcon } from "../icons/sidebar/accounts-icon";
 import { CustomersIcon } from "../icons/sidebar/customers-icon";
@@ -19,7 +18,7 @@ import { FilterIcon } from "../icons/sidebar/filter-icon";
 import { useSidebarContext } from "../layout/layout-context";
 import { ChangeLogIcon } from "../icons/sidebar/changelog-icon";
 import { usePathname } from "next/navigation";
-
+import MenuIcon from '@mui/icons-material/Menu';
 export const SidebarWrapper = () => {
   const pathname = usePathname();
   const { collapsed, setCollapsed } = useSidebarContext();
@@ -64,7 +63,7 @@ export const SidebarWrapper = () => {
                 isActive={pathname === "/menu"}
                 title="Menu"
                 href="menu"
-                icon={<PaymentsIcon />}
+                icon={<MenuIcon />}
               />
               <CollapseItems
                 icon={<BalanceIcon />}
