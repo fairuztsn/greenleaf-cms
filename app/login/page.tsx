@@ -27,13 +27,14 @@ export default function Login() {
         .from('ad_profile_data')
         .select("*")
         .eq('email', email)
-        .single();
+        .maybeSingle();
 
       if (userDataFetchingError) {
         throw new Error(userDataFetchingError.message);
       }
 
-      const { error: userAttemptError } = await supabase
+      if (userData && (userData.privilege_id === "Admin" || userData.privilege_id === "Super Admin")) {
+        const { error: userAttemptError } = await supabase
         .from('ad_user_attempt')
         .insert({
           user_id: userData.user_id,
@@ -42,7 +43,6 @@ export default function Login() {
           info: "Attempting login in cms"
         });
 
-      if (userData && (userData.privilege_id === "Admin" || userData.privilege_id === "Super Admin")) {
         const { data, error: signInError } = await supabase.auth.signInWithPassword({
           email: email,
           password: password
@@ -74,7 +74,7 @@ export default function Login() {
       setPassword('');
       router.push("/");
     } catch (error) {
-      alert(`An error occurred.`);
+      alert(error);
       setLoading(false)
     }
 }

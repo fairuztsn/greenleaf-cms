@@ -5,8 +5,8 @@ import { EditIcon } from "./icons/table/edit-icon";
 import { EyeIcon } from "./icons/table/eye-icon";
 import { User as SupabaseUser } from "@supabase/supabase-js";
 import { supabase } from "@/utils/supabase";
-import { usePathname } from "next/navigation";
-import { destroy } from "./handler";
+import { usePathname, useRouter } from "next/navigation";
+import { destroy, update } from "./handler";
 
 interface Props {
   data: any;
@@ -15,6 +15,7 @@ interface Props {
 
 export const RenderCell = ({ data, columnKey }: Props) => {
   const pathname = usePathname().substring(1)
+  const router = useRouter()
   // @ts-ignore
   const cellValue = data[columnKey];
   switch (columnKey) {
@@ -61,17 +62,19 @@ export const RenderCell = ({ data, columnKey }: Props) => {
         <div className="flex items-center gap-4 ">
           <div>
             <Tooltip content="Details">
-              <button onClick={() => console.log("View ", data.id)}>
+              <button onClick={() => {
+                  router.push(`${pathname}/${data.id}`)
+                }}>
                 <EyeIcon size={20} fill="#979797" />
               </button>
             </Tooltip>
           </div>
           <div>
-            <Tooltip content="Edit" color="secondary">
-              <button onClick={() => console.log("Edit ", data.id)}>
+            {/* <Tooltip content="Edit" color="secondary">
+              <button >
                 <EditIcon size={20} fill="#979797" />
               </button>
-            </Tooltip>
+            </Tooltip> */}
           </div>
           <div>
             <Tooltip
