@@ -21,11 +21,11 @@ type Column = {
 
 export const AddMenu = () => {
   const columns: Column[] = [
-    {name: "menu_name", type: "text"},
-    {name: "group_menu", type: "text"},
-    {name: "status", type: "number"},
-    {name: "user_privilege", type: "text"}
-  ]
+        { name: 'menu_name', type: 'text' },
+        { name: 'group_menu', type: 'text' },
+        { name: 'status', type: 'number' },
+        { name: 'privilege_level', type: 'text' }
+    ];
 
   const columnNames = columns.map(cols => cols.name)
 

@@ -24,7 +24,7 @@ export const AddFeature = () => {
     {name: "name", type: "text"},
     {name: "group_feature", type: "text"},
     {name: "icon_feature", type: "text"},
-    { name: 'mobile_path', type: 'text' },
+    {name: 'mobile_path', type: 'text' },
     {name: "status", type: "number"},
     {name: "creator", type: "text"},
     {name: "updater", type: "text"},

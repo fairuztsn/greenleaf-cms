@@ -14,7 +14,7 @@ const columnMap: Record<ColumnContext, string[]> = {
     "id", "created_at", "user_id","first_name","last_name","email","phone_number","home_street","home_city","home_province","photo_profile","status","creator","updated_at","updater","role_id","privilege_id"
   ],
   "menu": [
-    "id", "created_at","menu_name","group_menu","status","creator","updated_at","updater", "user_privilege"
+    "id", "created_at","menu_name","group_menu","status","creator","updated_at","updater", "privilege_level"
   ],
   "features": [
     "id", "created_at","name","group_feature","icon_feature", "mobile_path", "status","creator","updated_at","updater","role_id"
