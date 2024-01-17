@@ -11,6 +11,10 @@ interface PageProps {
     params: {id: number}
 }
 
+interface InputData {
+  [key: string]: null;
+}
+
 const Page = ({params}: PageProps) => {
     const columns = [
         { name: 'id', type: 'number' },
@@ -30,12 +34,12 @@ const Page = ({params}: PageProps) => {
 
     const [data, setData] = useState<any | null>(undefined)
     const [loading, setLoading] = useState(true)
-    const [inputData, setInputData] = useState<any>(
-        columns.reduce((acc, column) => {
+    const [inputData, setInputData] = useState<InputData>(
+        columns.reduce((acc: InputData, column) => {
             acc[column.name] = null;
             return acc;
         }, {})
-    );
+    )
 
     useEffect(() => {
         const fetchData = async () => {
