@@ -1,4 +1,4 @@
-import { supabase } from "@/utils/supabase";
+import { supabase } from "./supabase";
 
 type TableContext = "users" | "menu" | "features"
 type ColumnContext = "users" | "menu" | "features"

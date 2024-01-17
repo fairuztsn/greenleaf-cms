@@ -6,7 +6,7 @@ import { EyeIcon } from "./icons/table/eye-icon";
 import { User as SupabaseUser } from "@supabase/supabase-js";
 import { supabase } from "@/utils/supabase";
 import { usePathname, useRouter } from "next/navigation";
-import { destroy, update } from "./handler";
+import { destroy, update } from "../utils/handler";
 
 interface Props {
   data: any;

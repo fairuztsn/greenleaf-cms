@@ -9,7 +9,7 @@ import {
 } from "@nextui-org/react";
 
 import React, { useEffect, useState } from "react";
-import { fetchDataFromSupabase } from "../data";
+import { fetchDataFromSupabase } from "../../utils/data";
 import { RenderCell } from "../render-cell";
 import Loading from "../loading/loading";
 
