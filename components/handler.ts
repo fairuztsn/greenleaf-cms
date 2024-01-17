@@ -13,8 +13,11 @@ const tableMap = (context: string): string | undefined => {
     }[context]
 }
 
+interface StringKeyObject {
+  [key: string]: any;
+}
 
-const areObjectsEqual = (obj1, obj2) => {
+const areObjectsEqual = (obj1: StringKeyObject, obj2: StringKeyObject) => {
   const keys1 = Object.keys(obj1)
   const keys2 = Object.keys(obj2)
 
