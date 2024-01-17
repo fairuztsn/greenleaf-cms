@@ -16,8 +16,10 @@ import Loading from "../loading/loading";
 
 type Column = {
   name: string;
-  type: string; // You might want to use a more specific type based on your actual data types
+  type: string;
 };
+
+type DataInterface = Record<string, any>;
 
 export const AddUser = () => {
   const columns: Column[] = [
@@ -44,7 +46,7 @@ export const AddUser = () => {
   const [ currentUser, setCurrentUser ] = useState<any>(null)
   const [ isLoading, setIsLoading ] = useState(true)
 
-  const [data, setData] = useState<Object>(
+  const [data, setData] = useState<DataInterface>(
     Object.fromEntries(columnNames.map((col: string) => [col, null]))
   )
 
@@ -68,7 +70,7 @@ export const AddUser = () => {
   const handleAddUser = async () => {
     setIsLoading(true);
 
-    const userData = {
+    const userData: DataInterface = {
       ...data,
       creator: currentUser.email,
       created_at: new Date().toISOString(),
