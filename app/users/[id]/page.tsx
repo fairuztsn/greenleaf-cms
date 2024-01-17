@@ -67,7 +67,7 @@ const Page = ({params}: PageProps) => {
         };
 
         fetchData();
-    }, []);
+    }, [params.id]);
 
     const handleInputChange = (index: string, value: any) => {
         let updatedValues = { ...inputData, [index]: value };

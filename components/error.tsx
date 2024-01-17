@@ -11,7 +11,7 @@ export default function Error() {
                 <p className="text-xs whitespace-pre-wrap opacity-75">
                     No worries, though! Feel free to reach out to our tech wizards and let them know what happened.
                     <br />
-                    They've got their troubleshooting wands ready to work their magic. 🧙‍♂️🕹️ #GlitchInOurMatrix
+                    They&apos;ve got their troubleshooting wands ready to work their magic. 🧙‍♂️🕹️ #GlitchInOurMatrix
                 </p>
             </div>
         </div>
