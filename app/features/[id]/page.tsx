@@ -15,22 +15,17 @@ const Page = ({params}: PageProps) => {
     const columns = [
         { name: 'id', type: 'number' },
         { name: 'created_at', type: 'datetime-local' },
-        { name: 'user_id', type: 'text' },
-        { name: 'first_name', type: 'text' },
-        { name: 'last_name', type: 'text' },
-        { name: 'email', type: 'email' },
-        { name: 'phone_number', type: 'tel' },
-        { name: 'home_street', type: 'text' },
-        { name: 'home_city', type: 'text' },
-        { name: 'home_province', type: 'text' },
-        { name: 'photo_profile', type: 'url' },
+        { name: 'name', type: 'text' },
+        { name: 'group_feature', type: 'text' },
+        { name: 'icon_feature', type: 'text' },
         { name: 'status', type: 'checkbox' },
         { name: 'creator', type: 'text' },
         { name: 'updated_at', type: 'datetime-local' },
         { name: 'updater', type: 'text' },
         { name: 'role_id', type: 'number' },
-        { name: 'privilege_id', type: 'text' }
-    ]
+        { name: 'mobile_path', type: 'text' }
+    ];
+
 
     const router = useRouter()
     const pathname = usePathname()
@@ -49,7 +44,7 @@ const Page = ({params}: PageProps) => {
         const fetchData = async () => {
             try {
                 const { data, error } = await supabase
-                    .from("ad_profile_data")
+                    .from("ad_feature")
                     .select()
                     .eq("id", params.id)
                     .maybeSingle()
@@ -140,7 +135,7 @@ const Page = ({params}: PageProps) => {
                 if(confirm) {
                     setLoading(true)
                     try {
-                        const updatingData = await update("users", inputData, {key: "id", val: params.id})
+                        const updatingData = await update("features", inputData, {key: "id", val: params.id})
 
                         if(updatingData) {
                             router.replace("/"+firstPathSegment)
