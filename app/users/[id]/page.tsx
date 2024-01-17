@@ -1,5 +1,5 @@
 "use client"
-import { update } from "@/components/handler"
+import { update } from "@/utils/handler"
 import Loading from "@/components/loading/loading"
 import { snakeToSentence } from "@/utils/snakeCaseConverter"
 import { supabase } from "@/utils/supabase"
