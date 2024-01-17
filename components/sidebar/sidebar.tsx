@@ -1,6 +1,6 @@
 import React from "react";
 import { Sidebar } from "./sidebar.styles";
-import { Avatar, Tooltip } from "@nextui-org/react";
+import { Avatar, AvatarIcon ,Tooltip } from "@nextui-org/react";
 import { CompaniesDropdown } from "./companies-dropdown";
 import { HomeIcon } from "../icons/sidebar/home-icon";
 import { BalanceIcon } from "../icons/sidebar/balance-icon";
@@ -77,7 +77,7 @@ export const SidebarWrapper = () => {
                 icon={<SettingsSuggest />}
                 href="features"
               />
-              <SidebarItem
+              {/* <SidebarItem
                 isActive={pathname === "/products"}
                 title="Products"
                 icon={<ProductsIcon />}
@@ -86,11 +86,11 @@ export const SidebarWrapper = () => {
                 isActive={pathname === "/reports"}
                 title="Reports"
                 icon={<ReportsIcon />}
-              />
+              /> */}
             </SidebarMenu>
 
             <SidebarMenu title="General">
-              <SidebarItem
+              {/* <SidebarItem
                 isActive={pathname === "/developers"}
                 title="Developers"
                 icon={<DevIcon />}
@@ -99,7 +99,7 @@ export const SidebarWrapper = () => {
                 isActive={pathname === "/view"}
                 title="View Test Data"
                 icon={<ViewIcon />}
-              />
+              /> */}
               <SidebarItem
                 isActive={pathname === "/settings"}
                 title="Settings"
@@ -121,15 +121,22 @@ export const SidebarWrapper = () => {
                 <SettingsIcon />
               </div>
             </Tooltip>
-            <Tooltip content={"Adjustments"} color="success">
+            {/* <Tooltip content={"Adjustments"} color="success">
               <div className="max-w-fit">
                 <FilterIcon />
               </div>
-            </Tooltip>
+            </Tooltip> */}
             <Tooltip content={"Profile"} color="success">
               <Avatar
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                size="sm"
+                as="button"
+                color="secondary"
+                size="md"
+                icon={<AvatarIcon />}
+                classNames={{
+                base: "bg-[#15b24b]",
+                icon: "text-black/80",
+              }}
+                // isBordered
               />
             </Tooltip>
           </div>
