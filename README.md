@@ -1,70 +1,44 @@
-# NextJS and NextUI Dashboard Template Starter
+![Logo](https://github.com/fairuztsn/greenleaf/blob/main/assets/img/greenleaf_logo_2.png) 
+# Waste Management App
 
-You can deploy here directly to vercel [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/Siumauricio/nextui-dashboard-template)
+Welcome to our ♻️ Waste Solution App! Our team (Team Apollo 🚀), the driving force behind our innovative approach to waste management. Our mission is to empower communities to actively participate in waste management and contribute to achieving Sustainable Development Goals (SDGs). By utilizing our app, you can play a crucial role in realizing Sustainable Cities and Communities, Climate Action, Responsible Consumption & Production, and Life On Land. Additionally, we aim to support economic growth through Decent Work & Economic Growth and Partnership For Goals by creating job opportunities for millions of people. 🌍🌱💼
 
+## Key Features
 
-V1 Version Stitches https://v1-nextui-dashboard-template.vercel.app/
-V1 Code: https://github.com/Siumauricio/nextui-dashboard-template/tree/v1
+### 1. Inorganic Waste Solution
 
-This is a template for NextJS and NextUI. 
+#### Overview
+This feature caters to shopkeepers and households with small quantities of junk items. 🛒 With a simple tap on your phone screen, you can easily locate the nearest collectors who are willing to buy your junk. 💰 This not only benefits shopkeepers and households but also creates opportunities for our partners, who act as middlemen between sellers and collectors. 🤝
 
-[NextJS](https://nextjs.org/) 
-[NextUI](https://nextui.org/)
+#### How It Works
+- Shopkeepers and households 🛍️ list their inorganic waste items on the app.
+- Nearby collectors receive notifications about available items.
+- Partners 🤝 act as intermediaries, buying from sellers and selling to collectors, earning income from the price difference. 💰
 
-You can see the demo here: https://nextui-dashboard-template.vercel.app/
-For improve this template, you can create a pull request or open an issue here [Issues](https://github.com/Siumauricio/nextui-dashboard-template/issues) or [Pull Request](
-    https://github.com/Siumauricio/nextui-dashboard-template/pulls)
+#### Benefits
+- Simplifies the process of buying and selling junk items. 🔄
+- Creates additional income opportunities for partners. 💼
+- Strengthens the relationship between shopkeepers, households, and partners in the junk sales ecosystem. 🌐
 
-### Dark Mode
-![Dashboard Dark Mode](./public/dark.png)
+### 2. Organic Waste Solution
 
-### Light Mode
-![Dashboard Light Mode](./public/light.png)
+#### Overview
+This feature addresses organic waste treatment by facilitating transactions between users and maggot sellers. Users can purchase maggots as a bioconversion method for processing organic waste independently.
 
+#### How It Works
+- Users explore maggot seed seller partners on the app.
+- Transactions with maggot sellers are made easily and securely.
+- Detailed education is provided on utilizing maggots as a bioconversion method.
 
+#### Benefits
+- Provides an eco-friendly solution for organic waste treatment. 🌱
+- Facilitates safe and easy transactions with maggot sellers. 💳🛒
+- Offers detailed education on utilizing maggots for waste processing. 
 
-- Dark Mode Support
-- Full Responsive
-- Home Page with Charts
-- Accounts Page
-- More pages coming soon...
+## Our Impact
 
-```
-├── components
-│   ├── accounts            # Accounts components
-│   ├── charts              # Charts components
-│   ├── breadcrumb          # component
-|   ├── home                # Home components
-|   ├── layout              # Layout components
-|   ├── navbar              # Navbar components
-|   ├── sidebar             # Sidebar components
-|   ├── table               # Table components
-|   ├── styles              # Some reusable components
-|   ├── icons               # Icons
-|   ├── hooks               #  Hooks
-├── pages                   # Documentation files 
-│   ├──  _app.tsx           # Entry point for the app
-│   ├──  index.tsx          # Home page
-│   ├── accounts.tsx        # Accounts Page
-│   ├── more...             # Soon
-└──
+We believe our app will contribute significantly to waste reduction, targeting 35.83 million tons by 2022. ♻️ Furthermore, based on August 2023 data, we anticipate creating jobs for 7.86 million people through our partners involved in waste collection. 🌐
 
-```
-## For Run
+Join us in breaking the cycle of waste and fostering a sustainable and economically thriving community! 🌍💪
 
-Install dependencies
-
-    
-```bash
-npm install
-```
-
-Start the server
-
-    
-        
-```bash
-npm run dev
-```
-
-Now you can visit https://localhost:3000 in your browser.
+Note: All monetary values are in Indonesian Rupiah (IDR). 💰🇮🇩
